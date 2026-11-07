@@ -2,11 +2,18 @@
 
 <a href="https://www.ucf.edu"><img src="assets/ucf-tab.svg" alt="UCF" height="56"></a>
 &nbsp;&nbsp;&nbsp;
-<img src="assets/cablab.svg" alt="cablab" height="56">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/lab_logo_min.svg">
+  <img src="assets/lab_logo_light.svg" alt="cablab" height="56">
+</picture>
 
-*Physics-first models, honest uncertainty, software you can hold in one head.*
+# cablab
+
+*Self-driving science: physics-first twins, honest uncertainty,
+software you can hold in one head.*
 
 [Live TEM twin](https://cab-ucf.github.io/tem/) ·
+[Self-driving lab](#-self-driving-lab) ·
 [Join](#-join-the-lab) ·
 [Principles](#-principles) ·
 [Findings](#-findings)
@@ -24,6 +31,7 @@
 
 We build *digital twins*: models of instruments, materials and patients
 that are differentiable end to end and return a posterior, not a guess.
+Then we hand them to agents.
 
 ```mermaid
 mindmap
@@ -41,10 +49,35 @@ mindmap
     Medicine
       Radiation + drug co-planning
       FLASH and abscopal response
+    Self-driving lab
+      Agents on instrument twins
+      Optimal experimental design
     Systems
       PQ peer-to-peer mesh
       Private AI on patient data
 ```
+
+## 🤖 Self-driving lab
+
+An agent that has never touched a microscope should not learn on one.
+Ours learn on the twin, where every knob is a key, every run replays
+bit for bit, and a mistake costs no sample. Then they drive the real thing.
+
+```mermaid
+flowchart LR
+  T[🧠 twin<br/>posterior] -->|most informative<br/>next experiment| A[🤖 agent]
+  A -->|drives| I[🔬 instrument]
+  I -->|measurement| T
+  T -.->|replay, audit| V[✅ any lab<br/>re-verifies]
+```
+
+- **Closed loop.** Posterior → choose the most informative experiment
+  → run it → update. Stop when the question is answered, not when the
+  budget is.
+- **Sample efficient by construction.** The Cramér–Rao bound says what a
+  measurement *can* tell you; the agent is scored against it.
+- **Verifiable.** Deterministic replay and reproducible builds mean
+  another self-driving lab can rerun our science and check it.
 
 ## ⚡ Findings
 
@@ -83,7 +116,7 @@ and the absolute height of $s$ splits armchair tubes where $p = s$.
 <tr><td width="50%" valign="top">
 
 ### 🔬 temtwin
-**A microscope that fits in a browser tab.**
+**Train the agent that runs the microscope.**
 
 Multislice physics in Rust, a wgpu console, deterministic replay,
 and a stdin API so an *agent* can drive the column.
@@ -158,20 +191,20 @@ private-AI mesh that brings code to the data.
 Keep it simple, think in Unix, and send or process only the information
 a task needs.
 
-| | Software | 🪞 | Science |
-|---|---|---|---|
-| 1 | **Plug-and-play, no required infrastructure.** Ultra-secure, highly private push with zero cloud setup. *Your desktops are the servers.* | ↔ | **Reproducible on any laptop.** One command (`just → podman → make → uv → typst`) rebuilds every figure and every number |
-| 2 | **Modern, simple PQ crypto.** X-Wing (ML-KEM-768 + X25519). End-to-end only: nothing is decrypted off an endpoint. Minimal metadata. One key per purpose | ↔ | **Minimal sufficient information.** Code goes to the data, never the reverse. Patient records stay home. One model per question |
-| 3 | **Rust as much as possible.** Platform glue stays a thin shell over the Rust core | ↔ | **Physics as the core.** Learning is a thin shell fitted only to what physics can't supply |
-| 4 | **Efficiency.** Every packet and CPU cycle must compute something that matters. Battery first on mobile | ↔ | **Sample efficiency.** Every electron, label and assay must carry information. Priors where data are cheap, measurements where they are not, Cramér–Rao bounds to keep score |
-| 5 | **Own infrastructure first.** No big-company infrastructure. No Google, no corporate clouds | ↔ | **Own the model.** Open, inspectable, differentiable twins of our own instruments, built on public data |
-| 6 | **FOSS, minimal, Unix.** Small composable tools (one CLI, a Unix socket, files, systemd, Nix). Few well-trusted deps, no telemetry, no blobs, less code over more features | ↔ | **Small composable models.** Each physical term a module you can test alone. Fewer parameters over more. Every answer ships with its uncertainty |
+| 🖥️ Software | 🔬 Science |
+|---|---|
+| **Zero-trust FOSS.** Independent of companies, built by fully reproducible systems | **Reproducible science**, verifiable by any self-driving lab |
+| **Peer-to-peer, no required infrastructure.** Your machines are the servers | **Decentralized science.** Instruments, twins and agents as peers |
+| **Post-quantum E2EE.** X-Wing (ML-KEM-768 + X25519), minimal metadata, one key per purpose | **Minimal data.** Only what the question needs; code goes to the data |
+| **Rust core**, thin platform glue | **Physics core**, thin learned layer |
+| **Every packet and CPU cycle earns its keep.** Battery first | **Every sample earns its keep.** Electrons, assays, labels |
+| **Small composable Unix tools.** Less code over more features | **Small composable models.** Fewer parameters, every answer with its uncertainty |
 
 > [!NOTE]
 > **Sample efficiency is a core research focus**, as much as compute efficiency.
-> Learning from 190 k cheap RNA-seq profiles to predict scarce corona data,
-> or quoting the electron dose an alignment *must* cost: same idea,
-> stated as a bound.
+> It is what lets a self-driving lab stop early: learn from
+> 190 k cheap RNA-seq profiles to predict scarce corona data, or quote the
+> electron dose an alignment *must* cost.
 
 ```diff
 + Every line of code is a liability. Perfection is nothing left to remove.
@@ -188,7 +221,7 @@ a task needs.
 > terminal, write to **chase.brown@ucf.edu** with one line on which
 > project and one link to something you built.
 
-You'll get: real instruments *and* their twins, problems with
+You'll get: real instruments, their twins, and the agents that run both, problems with
 known answers to check yourself against, and code review
 that deletes more than it adds.
 
