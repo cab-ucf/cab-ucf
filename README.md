@@ -1,8 +1,8 @@
 <div align="center">
 
-# cablab
-
-**University of Central Florida**
+<a href="https://www.ucf.edu"><img src="assets/ucf-tab.svg" alt="UCF" height="56"></a>
+&nbsp;&nbsp;&nbsp;
+<img src="assets/cablab.svg" alt="cablab" height="56">
 
 *Physics-first models, honest uncertainty, software you can hold in one head.*
 
@@ -153,18 +153,31 @@ private-AI mesh that brings code to the data.
 
 ## 📜 Principles
 
+**Decentralized, peer-to-peer, post-quantum end-to-end encrypted.**
+[iroh](https://iroh.computer) (Rust, QUIC, E2EE p2p) shows the way.
+Keep it simple, think in Unix, and send or process only the information
+a task needs.
+
+| | Software | 🪞 | Science |
+|---|---|---|---|
+| 1 | **Plug-and-play, no required infrastructure.** Ultra-secure, highly private push with zero cloud setup. *Your desktops are the servers.* | ↔ | **Reproducible on any laptop.** One command (`just → podman → make → uv → typst`) rebuilds every figure and every number |
+| 2 | **Modern, simple PQ crypto.** X-Wing (ML-KEM-768 + X25519). End-to-end only: nothing is decrypted off an endpoint. Minimal metadata. One key per purpose | ↔ | **Minimal sufficient information.** Code goes to the data, never the reverse. Patient records stay home. One model per question |
+| 3 | **Rust as much as possible.** Platform glue stays a thin shell over the Rust core | ↔ | **Physics as the core.** Learning is a thin shell fitted only to what physics can't supply |
+| 4 | **Efficiency.** Every packet and CPU cycle must compute something that matters. Battery first on mobile | ↔ | **Sample efficiency.** Every electron, label and assay must carry information. Priors where data are cheap, measurements where they are not, Cramér–Rao bounds to keep score |
+| 5 | **Own infrastructure first.** No big-company infrastructure. No Google, no corporate clouds | ↔ | **Own the model.** Open, inspectable, differentiable twins of our own instruments, built on public data |
+| 6 | **FOSS, minimal, Unix.** Small composable tools (one CLI, a Unix socket, files, systemd, Nix). Few well-trusted deps, no telemetry, no blobs, less code over more features | ↔ | **Small composable models.** Each physical term a module you can test alone. Fewer parameters over more. Every answer ships with its uncertainty |
+
+> [!NOTE]
+> **Sample efficiency is a core research focus**, as much as compute efficiency.
+> Learning from 190 k cheap RNA-seq profiles to predict scarce corona data,
+> or quoting the electron dose an alignment *must* cost: same idea,
+> stated as a bound.
+
 ```diff
 + Every line of code is a liability. Perfection is nothing left to remove.
 + Explore before exploit: an hour of search saves a week of rewrite.
-+ Be skeptical. If it exists, use it. If it's not novel, say why.
-+ Physics first; fit only what physics can't supply.
-+ Every answer ships with its uncertainty.
-+ One command rebuilds it: just → podman → make → uv → typst.
-+ Rust core. Kotlin glue. Python as a thin shell.
-+ Decentralized, plug-and-play: iroh before anyone's cloud.
-+ Post-quantum E2EE by default (X-Wing, ML-KEM).
-+ Efficiency is a feature: fewer cycles, longer batteries.
-+ FOSS, AGPL / GPLv3, Unix, Nix. Small tools, few trusted deps.
++ Be skeptical. If it exists, use it. If it isn't novel, say why.
++ Licensed AGPL / GPLv3.
 - Telemetry. Proprietary blobs. Boilerplate. Required infrastructure.
 ```
 
